@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday, Nandu 🎉</title>
+  <meta name="description" content="A birthday website celebrating Nanditha — aka Nandu — with memories, wishes, and love." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #fff9fb;
+      --card: #ffffff;
+      --ink: #24262e;
+      --muted: #666b78;
+      --brand: #ff5da2;   /* pink */
+      --brand-2: #7c6cff; /* lavender */
+      --accent: #11cdef;  /* blue */
+      --ring: rgba(124,108,255,.35);
+      --shadow: 0 10px 30px rgba(124,108,255,.15);
+      --radius: 22px;
+    }
+    *{ box-sizing: border-box }
+    html,body{ height:100%; scroll-behavior:smooth }
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font-family:"Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.6;
+    }
+    a{ color:inherit; text-decoration:none }
+    img{ max-width:100%; display:block }
+    .container{ width:min(1100px, 92%); margin-inline:auto }
+
+    /* Top Nav */
+    header{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.2) blur(8px);
+      background:rgba(255,255,255,.6); border-bottom:1px solid rgba(0,0,0,.05)
+    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 0 }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px }
+    .brand .logo{ width:34px; height:34px; border-radius:10px; display:grid; place-items:center; color:#fff; background:linear-gradient(135deg,var(--brand),var(--brand-2)); box-shadow:var(--shadow) }
+    .nav a.btn{ padding:10px 16px; border-radius:999px; border:1px solid transparent; background:var(--ink); color:#fff; font-weight:600 }
+    .menu{ display:flex; gap:14px; flex-wrap:wrap }
+    .menu a{ padding:8px 12px; border-radius:999px; color:var(--muted); font-weight:600 }
+    .menu a:hover, .menu a.active{ color:var(--ink); background:rgba(124,108,255,.08) }
+
+    /* Hero */
+    .hero{ position:relative; isolation:isolate; padding:84px 0 60px; overflow:hidden; border-bottom:1px dashed rgba(0,0,0,.08) }
+    .hero .grid{ display:grid; grid-template-columns: 1.2fr .8fr; gap:36px; align-items:center }
+    .hero h1{ font-size:clamp(32px, 5vw, 58px); line-height:1.1; margin:0 0 10px }
+    .badge{ display:inline-flex; gap:8px; align-items:center; padding:6px 12px; border-radius:999px; background:rgba(255,93,162,.12); color:#c42f76; font-weight:700; font-size:14px; border:1px solid rgba(255,93,162,.25) }
+    .hero p{ color:var(--muted); font-size:clamp(15px, 2.3vw, 18px) }
+    .cta-row{ display:flex; gap:12px; margin-top:18px; flex-wrap:wrap }
+    .btn{
+      display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border-radius:999px; border:1px solid rgba(0,0,0,.08);
+      background:#fff; box-shadow:var(--shadow); font-weight:700
+    }
+    .btn.primary{ background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#fff; border-color:transparent }
+    .btn.ghost{ background:transparent }
+    .hero-card{ background:var(--card); border-radius:var(--radius); padding:16px; box-shadow:var(--shadow); border:1px solid rgba(0,0,0,.06) }
+    .hero-card img{ border-radius:18px }
+    .hero .confetti, .balloons{ position:absolute; inset:0; z-index:-1; pointer-events:none }
+
+    /* Section wrappers */
+    section{ padding:70px 0 }
+    section h2{ font-size:clamp(26px, 3.6vw, 38px); margin:0 0 12px }
+    section p.lead{ color:var(--muted); margin:0 0 24px }
+
+    /* About */
+    .about{ display:grid; grid-template-columns: 1fr 1fr; gap:26px }
+    .about .card{ background:var(--card); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); border:1px solid rgba(0,0,0,.06) }
+    .kv-list{ display:grid; grid-template-columns: 1fr 1fr; gap:10px 16px; margin-top:6px }
+    .kv{ background:rgba(124,108,255,.06); padding:10px 12px; border-radius:12px; border:1px solid rgba(124,108,255,.15) }
+
+    /* Memories */
+    .grid-cards{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:16px }
+    .card{ background:var(--card); border-radius:18px; border:1px solid rgba(0,0,0,.06); box-shadow:var(--shadow); overflow:hidden }
+    .card .cap{ padding:12px 14px }
+    .chip{ font-size:12px; color:#774fd1; background:rgba(124,108,255,.12); padding:6px 10px; border-radius:999px; border:1px solid rgba(124,108,255,.25); font-weight:700 }
+
+    /* Wishes */
+    .wishes{ display:grid; grid-template-columns: .9fr 1.1fr; gap:22px }
+    form .field{ display:grid; gap:6px; margin-bottom:12px }
+    input[type="text"], textarea{
+      border:1px solid rgba(0,0,0,.12); border-radius:14px; padding:12px 14px; font:inherit; background:#fff;
+      outline:none; box-shadow:0 0 0 0 rgba(124,108,255,0); transition: box-shadow .2s, border-color .2s
+    }
+    input:focus, textarea:focus{ border-color:var(--brand-2); box-shadow:0 0 0 4px var(--ring) }
+    textarea{ min-height:120px; resize:vertical }
+    .wish-list{ display:grid; gap:12px; max-height:420px; overflow:auto; padding-right:4px }
+    .wish{ background:var(--card); border:1px solid rgba(0,0,0,.06); border-radius:16px; padding:12px 14px; box-shadow:var(--shadow) }
+    .wish .meta{ font-size:12px; color:var(--muted) }
+
+    /* Footer */
+    footer{ padding:28px 0 60px; text-align:center; color:var(--muted) }
+    .top{ position:fixed; right:18px; bottom:18px; z-index:40 }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero .grid{ grid-template-columns: 1fr }
+      .about{ grid-template-columns: 1fr }
+      .wishes{ grid-template-columns: 1fr }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">🎂</div>
+        <span>Happy Birthday, <span style="color:var(--brand)">Nanditha</span>!</span>
+      </div>
+      <div class="menu" role="navigation" aria-label="Primary">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#memories">Memories</a>
+        <a href="#wishes">Wishes</a>
+      </div>
+      <a class="btn" href="#wishes">Send a Wish ✍️</a>
+    </nav>
+  </header>
+
+  <main id="home" class="hero">
+    <canvas class="confetti" id="confettiCanvas" aria-hidden="true"></canvas>
+    <div class="balloons" id="balloons" aria-hidden="true"></div>
+
+    <div class="container grid">
+      <div>
+        <span class="badge">Celebrating Nanditha — a.k.a. <strong>Nandu</strong> ✨</span>
+        <h1>Happy Birthday, Nandu! 💖</h1>
+        <p>
+          Today we celebrate your kindness, laughter, and the million memories that make you so special.
+          Scroll down for our favorite moments and birthday wishes made just for you.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="#memories">See Our Memories 📸</a>
+          <button class="btn ghost" id="playMusic" aria-pressed="false">Play Birthday Tune ♪</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img alt="Nanditha birthday hero" src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop" />
+      </div>
+    </div>
+  </main>
+
+  <section id="about" class="container">
+    <h2>About Nandu</h2>
+    <p class="lead">A little love letter to who you are and why we adore you.</p>
+    <div class="about">
+      <div class="card">
+        <h3>Why You’re Amazing</h3>
+        <p>
+          Nanditha is the friend who turns ordinary days into adventures. She’s caring,
+          hilarious, and the most reliable hype-person.
+        </p>
+        <div class="kv-list">
+          <div class="kv"><strong>Nickname:</strong> Nandu</div>
+          <div class="kv"><strong>Superpower:</strong> Making everyone smile</div>
+          <div class="kv"><strong>Vibe:</strong> Sunshine + sparkles</div>
+          <div class="kv"><strong>Favorites:</strong> Chocolate cake, road trips, selfies</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Fun Facts</h3>
+        <ul>
+          <li>Will never say no to chai ☕</li>
+          <li>Laugh so loud the birds notice 🐦</li>
+          <li>Knows the best reels to send at 2am</li>
+          <li>Queen of candid pictures 👑</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="memories" class="container">
+    <h2>Memories 📸</h2>
+    <p class="lead">Snapshots of the chaos and joy we’ve shared. Replace these images with your own!</p>
+
+    <div class="grid-cards">
+      <!-- Memory Card Template (duplicate as needed) -->
+      <figure class="card">
+        <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=1600&auto=format&fit=crop" alt="Bestie selfie moment"/>
+        <figcaption class="cap">
+          <div class="chip">College Days</div>
+          <p>First day selfie — we had no idea it would turn into a thousand laughs.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="card">
+        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=1600&auto=format&fit=crop" alt="Birthday cake moment"/>
+        <figcaption class="cap">
+          <div class="chip">Cakes & Candles</div>
+          <p>That time the candle wouldn’t blow out and we all panicked 😂</p>
+        </figcaption>
+      </figure>
+
+      <figure class="card">
+        <img src="https://images.unsplash.com/photo-1514517220039-3db2d508a4b4?q=80&w=1600&auto=format&fit=crop" alt="Road trip"/>
+        <figcaption class="cap">
+          <div class="chip">Road Trip</div>
+          <p>Windows down, playlist up, zero destination — perfect.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="card">
+        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=1600&auto=format&fit=crop" alt="Friends hangout"/>
+        <figcaption class="cap">
+          <div class="chip">Golden Hour</div>
+          <p>Sunset walks and life talks. You make it all better.</p>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="wishes" class="container">
+    <h2>Birthday Wishes ✍️</h2>
+    <p class="lead">Leave a sweet note for Nandu. They’ll appear below instantly (saved only in your browser).</p>
+
+    <div class="wishes">
+      <form id="wishForm" class="card" aria-label="Wish form">
+        <div class="field">
+          <label for="name">Your Name</label>
+          <input id="name" name="name" type="text" placeholder="e.g., Srividya" required />
+        </div>
+        <div class="field">
+          <label for="message">Your Message</label>
+          <textarea id="message" name="message" placeholder="Write a heartfelt wish for Nandu…" required></textarea>
+        </div>
+        <button class="btn primary" type="submit">Post Wish 💌</button>
+        <button class="btn" id="clearWishes" type="button" title="This only clears your local list">Clear All (Local)</button>
+      </form>
+
+      <div class="card" aria-live="polite" aria-busy="false">
+        <div style="padding:16px 16px 0"><strong>Messages for Nanditha</strong></div>
+        <div class="wish-list" id="wishList" style="padding:16px"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="container">
+    <p>Made with 💖 for <strong>Nanditha</strong> — our beloved <strong>Nandu</strong>. Wishing you joy, health, and endless laughter!</p>
+    <a class="top btn" href="#home" aria-label="Back to top">⬆️</a>
+  </footer>
+
+  <!-- Optional: lightweight tune (royalty-free sample). Replace src with your own MP3 file path. -->
+  <audio id="song" preload="none">
+    <source src="https://cdn.pixabay.com/download/audio/2022/02/23/audio_2a2f6e0d7a.mp3?filename=happy-birthday-126516.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    // Smooth active link highlight
+    const sections = [...document.querySelectorAll('main, section')];
+    const menuLinks = [...document.querySelectorAll('.menu a')];
+    const activateLink = (id) => {
+      menuLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    };
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e=>{ if(e.isIntersecting) activateLink(e.target.id) });
+    }, { rootMargin:'-40% 0px -55% 0px', threshold: .01 });
+    sections.forEach(s=>obs.observe(s));
+
+    // Confetti canvas (simple, light)
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, confetti = [];
+    function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = document.querySelector('.hero').offsetHeight; }
+    window.addEventListener('resize', resize); resize();
+    function makePiece(){
+      return { x: Math.random()*W, y: -10, r: 4+Math.random()*6, s: 1+Math.random()*2.2, a: Math.random()*360 };
+    }
+    for(let i=0;i<140;i++) confetti.push(makePiece());
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      confetti.forEach(p=>{
+        p.y += p.s; p.x += Math.sin((p.y+p.a)/40);
+        if(p.y > H+10) { p.y = -10; p.x = Math.random()*W }
+        ctx.save();
+        ctx.translate(p.x, p.y); ctx.rotate(p.a);
+        ctx.fillStyle = ['#ff5da2','#7c6cff','#11cdef','#ffd166'][p.r|0 % 4];
+        ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r);
+        ctx.restore();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // Simple floating balloons
+    const balloonWrap = document.getElementById('balloons');
+    const colors = ['#ff5da2','#7c6cff','#11cdef','#ffd166'];
+    for(let i=0;i<20;i++){
+      const b = document.createElement('div');
+      const size = 40 + Math.random()*30;
+      const left = Math.random()*95;
+      const dur = 12 + Math.random()*16;
+      b.style.cssText = `position:absolute;width:${size}px;height:${size*1.2}px;left:${left}%;bottom:-120px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:${colors[i%colors.length]};opacity:.18;filter:saturate(120%);animation: rise ${dur}s linear ${Math.random()*10}s infinite;`;
+      const knot = document.createElement('span');
+      knot.style.cssText = 'position:absolute;left:50%;bottom:-6px;width:8px;height:8px;background:inherit;transform:translateX(-50%) rotate(45deg)';
+      b.appendChild(knot);
+      balloonWrap.appendChild(b);
+    }
+    const style = document.createElement('style');
+    style.textContent = `@keyframes rise { from{ transform:translateY(0) } to{ transform:translateY(-120vh) } }`;
+    document.head.appendChild(style);
+
+    // Wishes (localStorage)
+    const list = document.getElementById('wishList');
+    const form = document.getElementById('wishForm');
+    const clearBtn = document.getElementById('clearWishes');
+    const storageKey = 'nandu-wishes-v1';
+
+    function renderWishes(){
+      list.innerHTML = '';
+      const wishes = JSON.parse(localStorage.getItem(storageKey)||'[]');
+      wishes.forEach(w => list.appendChild(wishItem(w)));
+    }
+    function wishItem({name, message, at}){
+      const d = new Date(at);
+      const el = document.createElement('div');
+      el.className = 'wish';
+      el.innerHTML = `<div class="meta">From <strong>${escapeHtml(name)}</strong> • ${d.toLocaleString()}</div><div>${linkify(escapeHtml(message))}</div>`;
+      return el;
+    }
+    function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c])) }
+    function linkify(s){ return s.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener">$1<\/a>') }
+
+    form.addEventListener('submit', e=>{
+      e.preventDefault();
+      const name = form.name.value.trim();
+      const message = form.message.value.trim();
+      if(!name || !message) return;
+      const item = { name, message, at: Date.now() };
+      const wishes = JSON.parse(localStorage.getItem(storageKey)||'[]');
+      wishes.unshift(item);
+      localStorage.setItem(storageKey, JSON.stringify(wishes));
+      form.reset();
+      renderWishes();
+    });
+    clearBtn.addEventListener('click', ()=>{
+      if(confirm('This will clear wishes stored in this browser only. Continue?')){
+        localStorage.removeItem(storageKey); renderWishes();
+      }
+    });
+    renderWishes();
+
+    // Audio toggle
+    const playBtn = document.getElementById('playMusic');
+    const audio = document.getElementById('song');
+    let playing = false;
+    playBtn.addEventListener('click', async ()=>{
+      try{
+        if(!playing){ await audio.play(); playBtn.textContent = 'Pause Music ❚❚'; }
+        else { audio.pause(); playBtn.textContent = 'Play Birthday Tune ♪'; }
+        playing = !playing;
+      }catch(err){ alert('Tap again to allow audio to play.'); }
+    });
+  </script>
+</body>
+</html>
